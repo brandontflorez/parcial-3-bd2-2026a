@@ -22,7 +22,7 @@ Además, permite consultar cartera pendiente y el estado de los inmuebles.
 
 ## Tecnologías utilizadas
 
-* Python 3
+* Python 
 * Flask
 * MySQL
 * HTML
@@ -66,7 +66,7 @@ Administrador
 
 ```text
 Usuario: admin
-Contraseña: admin123
+Contraseña: **************
 ```
 
 ## Funcionalidades
