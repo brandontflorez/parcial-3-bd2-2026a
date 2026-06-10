@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Cuotas{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+
+<h3 class="mb-3">💳 Cuotas</h3>
+
+<div class="card shadow">
+<div class="card-body">
+
+<table class="table table-hover align-middle">
+
+<thead class="table-dark">
+<tr>
+    <th>ID</th>
+    <th>Cliente</th>
+    <th>Valor</th>
+    <th>Estado</th>
+    <th>Pagar</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for c in cuotas %}
+
+<tr>
+
+    <td>{{ c.id_cuota }}</td>
+
+    <td>{{ c.nombres }} {{ c.apellidos }}</td>
+
+    <td>$ {{ "{:,.0f}".format(c.valor) }}</td>
+
+    <td>
+        {% if c.estado == 'Pagada' %}
+            <span class="badge bg-success">Pagada</span>
+        {% elif c.estado == 'Parcial' %}
+            <span class="badge bg-warning text-dark">Parcial</span>
+        {% else %}
+            <span class="badge bg-danger">Pendiente</span>
+        {% endif %}
+    </td>
+
+    <td>
+
+        {% if c.estado != 'Pagada' %}
+
+        <form action="/pagar_cuota/{{ c.id_cuota }}" method="POST" class="d-flex gap-2">
+
+            <input type="number"
+                   name="monto"
+                   class="form-control form-control-sm"
+                   placeholder="Monto"
+                   min="1"
+                   required>
+
+            <button type="submit" class="btn btn-success btn-sm">
+                💰 Pagar
+            </button>
+
+        </form>
+
+        {% else %}
+
+        <span class="text-muted">✔ Pagada</span>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+</div>
+
+</div>
+
+{% endblock %}
